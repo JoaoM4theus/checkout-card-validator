@@ -35,12 +35,15 @@ class AddressViewController: UIViewController {
         return element
     }()
     
-    private lazy var documentTextField: UITextField = {
-        let element = UITextField()
+    private lazy var documentTextField: CustomTextField = {
+        let element = CustomTextField()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.isUserInteractionEnabled = true
         element.placeholder = "CPF"
         element.borderStyle = .roundedRect
+        element.delegate = self
+        element.customMask = DocumentMask()
+        element.text = "07493261318"
         return element
     }()
     
@@ -80,21 +83,23 @@ class AddressViewController: UIViewController {
         return element
     }()
     
-    private lazy var postalCodeTextField: UITextField = {
-        let element = UITextField()
-        element.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var postalCodeTextField: CustomTextField = {
+        let element = CustomTextField()
         element.isUserInteractionEnabled = true
         element.placeholder = "CEP"
         element.borderStyle = .roundedRect
+        element.delegate = self
+        element.customMask = PostalCodeMask()
+        element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var stateTextField: UITextField = {
         let element = UITextField()
-        element.translatesAutoresizingMaskIntoConstraints = false
         element.isUserInteractionEnabled = true
         element.placeholder = "Estado"
         element.borderStyle = .roundedRect
+        element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
 
@@ -141,4 +146,11 @@ class AddressViewController: UIViewController {
         ])
     }
 
+}
+
+extension AddressViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        print("shouldChangeCharactersIn")
+        return false;
+    }
 }
