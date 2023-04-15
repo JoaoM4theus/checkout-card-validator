@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 
     lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl(items: ["Endereço", "Cartão de Crédito"])
-        segmentedControl.addTarget(self, action: #selector(printItem(_:)), for: .valueChanged)
+        segmentedControl.addTarget(self, action: #selector(changeView(_:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
@@ -28,21 +28,29 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupConstraint()
         setupViews()
+        setupConstraint()
     }
     
     private func setupViews() {
         views = [UIView]()
         [AddressViewController().view,
          CreditCardViewController().view].forEach { view in
-            views.append(view)
+            view?.translatesAutoresizingMaskIntoConstraints = false
+            views.append(view ?? UIView())
         }
-        views.forEach { view in
-            viewContainer.addSubview(view)
-        }
+        viewContainer.addSubview(views[0])
+        setupConstraintInContainer(views[0])
+    }
 
-        viewContainer.bringSubviewToFront(views[0])
+    private func setupConstraintInContainer(_ view: UIView) {
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: viewContainer.topAnchor),
+            view.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor),
+            view.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor),
+            view.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor)
+        ])
+        viewContainer.bringSubviewToFront(view)
     }
 
     private func setupConstraint() {
@@ -60,9 +68,20 @@ class ViewController: UIViewController {
         ])
     }
     
-    @objc func printItem(_ segmentedControl: UISegmentedControl) {
-        viewContainer.bringSubviewToFront(views[segmentedControl.selectedSegmentIndex])
+    @objc func changeView(_ segmentedControl: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            updateView(oldView: views[1], newView: views[0])
+        case 1:
+            updateView(oldView: views[0], newView: views[1])
+        default: break
+        }
     }
 
+    private func updateView(oldView: UIView, newView: UIView) {
+        oldView.removeFromSuperview()
+        viewContainer.addSubview(newView)
+        setupConstraintInContainer(newView)
+    }
 }
 
