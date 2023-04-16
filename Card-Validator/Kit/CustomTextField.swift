@@ -17,6 +17,7 @@ class CustomTextField: UITextField {
             isUsingMask = true
         }
     }
+
     private var isUsingMask: Bool = false
 
     override init(frame: CGRect) {
@@ -28,14 +29,24 @@ class CustomTextField: UITextField {
     }
     
     override var text: String? {
-        get { return
-            super.text
+        get {
+            if isUsingMask {
+                super.text = customMask?.formateValue(super.text ?? "") ?? super.text
+                return super.text
+            }
+            return super.text
         }
         set {
             if isUsingMask {
                 return super.text = customMask?.formateValue(newValue ?? "") ?? newValue
             }
             return super.text = newValue
+        }
+    }
+
+    func updateText(string: String) {
+        if isUsingMask && text?.count ?? .zero < customMask?.maskFormat.count ?? .zero - 1 {
+            return super.text = customMask?.formateValue(string) ?? super.text
         }
     }
 }
