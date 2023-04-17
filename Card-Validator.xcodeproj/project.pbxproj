@@ -16,6 +16,7 @@
 		DC04322329E8BFBC00EE8E9F /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04322229E8BFBC00EE8E9F /* CreditCardViewController.swift */; };
 		DCBB3CCC29EAFAA800123724 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */; };
 		DCBB3CCE29EB063100123724 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB3CCD29EB063100123724 /* Mask.swift */; };
+		DCDC18F829EE0A42001FC5B4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DC04322229E8BFBC00EE8E9F /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
 		DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DCBB3CCD29EB063100123724 /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */,
 				DCBB3CCD29EB063100123724 /* Mask.swift */,
+				DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */,
 			);
 			path = Kit;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDC18F829EE0A42001FC5B4 /* StringExtensions.swift in Sources */,
 				DC04320F29E8BB9D00EE8E9F /* SegmentedViewController.swift in Sources */,
 				DC04320B29E8BB9D00EE8E9F /* AppDelegate.swift in Sources */,
 				DCBB3CCE29EB063100123724 /* Mask.swift in Sources */,

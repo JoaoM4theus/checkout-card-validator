@@ -39,6 +39,7 @@ class AddressViewController: UIViewController {
     private lazy var documentTextField: CustomTextField = {
         let element = CustomTextField()
         element.isUserInteractionEnabled = true
+        element.tag = 0
         element.placeholder = "CPF"
         element.borderStyle = .roundedRect
         element.delegate = self
@@ -166,8 +167,16 @@ class AddressViewController: UIViewController {
 extension AddressViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.tag == 1 {
+        switch textField.tag {
+        case 0:
+            if textField.text?.isCPF ?? false {
+                print("VÁLIDO")
+            } else {
+                print("INVÁLIDO")
+            }
+        case 1:
             getLocation(postalCode: textField.text ?? "")
+        default: break
         }
     }
 
