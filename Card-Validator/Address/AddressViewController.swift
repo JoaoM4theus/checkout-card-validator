@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AddressViewController: UIViewController {
 
@@ -50,6 +51,7 @@ class AddressViewController: UIViewController {
     private lazy var postalCodeTextField: CustomTextField = {
         let element = CustomTextField()
         element.isUserInteractionEnabled = true
+        element.tag = 1
         element.placeholder = "CEP"
         element.borderStyle = .roundedRect
         element.delegate = self
@@ -148,9 +150,27 @@ class AddressViewController: UIViewController {
         ])
     }
 
+    private func getLocation(postalCode: String) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(postalCode) { [weak self] (placemarks, error) in
+            if let placemarks = placemarks {
+                print(placemarks)
+                self?.cityTextField.text = placemarks.first?.locality ?? ""
+                self?.stateTextField.text = placemarks.first?.administrativeArea ?? ""
+                self?.neighborhoodTextField.text = placemarks.first?.subLocality ?? ""
+            }
+        }
+    }
 }
 
 extension AddressViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 1 {
+            getLocation(postalCode: textField.text ?? "")
+        }
+    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let textField = textField as? CustomTextField {
             textField.updateText(string: textField.text ?? "")

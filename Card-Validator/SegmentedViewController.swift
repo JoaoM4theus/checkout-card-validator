@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
-    
+
     private var views: [UIView]!
 
     lazy var segmentedControl: UISegmentedControl = {
@@ -83,5 +84,7 @@ class ViewController: UIViewController {
         viewContainer.addSubview(newView)
         setupConstraintInContainer(newView)
     }
+    
+    
 }
 
