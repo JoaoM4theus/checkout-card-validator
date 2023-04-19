@@ -23,7 +23,7 @@ class AddressViewController: UIViewController {
         element.translatesAutoresizingMaskIntoConstraints = false
         element.axis = .horizontal
         element.spacing = 4
-        element.distribution = .fillEqually
+        element.distribution = .fillProportionally
         return element
     }()
     
@@ -40,7 +40,9 @@ class AddressViewController: UIViewController {
         let element = CustomTextField()
         element.isUserInteractionEnabled = true
         element.tag = 0
-        element.placeholder = "CPF"
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
+        element.placeholder = "CPF *"
         element.borderStyle = .roundedRect
         element.delegate = self
         element.keyboardType = .numberPad
@@ -53,7 +55,9 @@ class AddressViewController: UIViewController {
         let element = CustomTextField()
         element.isUserInteractionEnabled = true
         element.tag = 1
-        element.placeholder = "CEP"
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
+        element.placeholder = "CEP *"
         element.borderStyle = .roundedRect
         element.delegate = self
         element.keyboardType = .numberPad
@@ -65,8 +69,11 @@ class AddressViewController: UIViewController {
     private lazy var addressTextField: UITextField = {
         let element = UITextField()
         element.translatesAutoresizingMaskIntoConstraints = false
+        element.tag = 2
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
         element.isUserInteractionEnabled = true
-        element.placeholder = "Endereço"
+        element.placeholder = "Endereço *"
         element.borderStyle = .roundedRect
         return element
     }()
@@ -74,8 +81,11 @@ class AddressViewController: UIViewController {
     private lazy var addressNumberTextField: UITextField = {
         let element = UITextField()
         element.translatesAutoresizingMaskIntoConstraints = false
+        element.tag = 3
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
         element.isUserInteractionEnabled = true
-        element.placeholder = "Número de endereço"
+        element.placeholder = "Número de endereço *"
         element.borderStyle = .roundedRect
         return element
     }()
@@ -83,8 +93,11 @@ class AddressViewController: UIViewController {
     private lazy var neighborhoodTextField: UITextField = {
         let element = UITextField()
         element.translatesAutoresizingMaskIntoConstraints = false
+        element.tag = 4
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
         element.isUserInteractionEnabled = true
-        element.placeholder = "Bairro"
+        element.placeholder = "Bairro *"
         element.borderStyle = .roundedRect
         return element
     }()
@@ -93,6 +106,8 @@ class AddressViewController: UIViewController {
         let element = UITextField()
         element.translatesAutoresizingMaskIntoConstraints = false
         element.isUserInteractionEnabled = true
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
         element.placeholder = "Complemento"
         element.borderStyle = .roundedRect
         return element
@@ -101,7 +116,10 @@ class AddressViewController: UIViewController {
     private lazy var stateTextField: UITextField = {
         let element = UITextField()
         element.isUserInteractionEnabled = true
-        element.placeholder = "Estado"
+        element.tag = 6
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
+        element.placeholder = "Estado *"
         element.borderStyle = .roundedRect
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -110,20 +128,56 @@ class AddressViewController: UIViewController {
     private lazy var cityTextField: UITextField = {
         let element = UITextField()
         element.translatesAutoresizingMaskIntoConstraints = false
+        element.tag = 7
+        element.layer.borderColor = UIColor.red.cgColor
+        element.layer.cornerRadius = 9
         element.isUserInteractionEnabled = true
-        element.placeholder = "Cidade"
+        element.placeholder = "Cidade *"
         element.borderStyle = .roundedRect
         return element
     }()
 
+    private lazy var goToCreditCardButton: UIButton = {
+        let element = UIButton()
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.setTitle("Avançar para cartão de crédito", for: .normal)
+        element.backgroundColor = .systemBlue
+        element.layer.cornerRadius = 9
+        element.addTarget(self, action: #selector(goToCrediCard), for: .touchUpInside)
+        return element
+    }()
+
+    private lazy var errorView: UIView = {
+        let element = UIView()
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.alpha = 0
+        element.backgroundColor = .systemRed
+        return element
+    }()
+    
+    private lazy var textError: UILabel = {
+        let element = UILabel()
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.text = "Preencha os campos obrigatórios, por favor!"
+        element.textColor = .white
+        element.adjustsFontSizeToFitWidth = true
+        return element
+    }()
+
+    private var arrayTextFields: [Int: String?] = [:]
+    private let viewModel = AddressViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         view.backgroundColor = .white
         setupConstraint()
     }
 
     private func setupConstraint() {
         let lg = view.safeAreaLayoutGuide
+        
+        errorView.addSubview(textError)
 
         addressStackView.addArrangedSubview(addressNumberTextField)
         addressStackView.addArrangedSubview(complementTextField)
@@ -143,11 +197,28 @@ class AddressViewController: UIViewController {
         }
         
         view.addSubview(mainStackView)
+        view.addSubview(goToCreditCardButton)
+        view.addSubview(errorView)
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: lg.topAnchor, constant: 20),
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            goToCreditCardButton.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 18),
+            goToCreditCardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            goToCreditCardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            goToCreditCardButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            textError.centerXAnchor.constraint(equalTo: errorView.centerXAnchor),
+            textError.centerYAnchor.constraint(equalTo: errorView.centerYAnchor),
+            textError.leadingAnchor.constraint(equalTo: errorView.leadingAnchor, constant: 6),
+            textError.trailingAnchor.constraint(equalTo: errorView.trailingAnchor, constant: -6),
+            
+            errorView.topAnchor.constraint(equalTo: goToCreditCardButton.bottomAnchor, constant: 20),
+            errorView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            errorView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            errorView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 
@@ -162,18 +233,37 @@ class AddressViewController: UIViewController {
             }
         }
     }
+    
+    @objc func goToCrediCard() {
+        arrayTextFields = [
+            documentTextField.tag: documentTextField.text,
+            postalCodeTextField.tag: postalCodeTextField.text,
+            addressTextField.tag: addressTextField.text,
+            addressNumberTextField.tag: addressNumberTextField.text,
+            neighborhoodTextField.tag: neighborhoodTextField.text,
+            stateTextField.tag: stateTextField.text,
+            cityTextField.tag: cityTextField.text
+        ]
+        viewModel.validateFields(array: arrayTextFields)
+    }
+
+    private func alertErrorTextField(_ textField: UITextField) {
+        UIView.animate(withDuration: 1.5) {
+            textField.layer.borderWidth = 2
+            self.errorView.alpha = 1
+        }
+        
+        UIView.animate(withDuration: 1.5) {
+            textField.layer.borderWidth = 0
+            self.errorView.alpha = 0
+        }
+    }
 }
 
 extension AddressViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField.tag {
-        case 0:
-            if textField.text?.isCPF ?? false {
-                print("VÁLIDO")
-            } else {
-                print("INVÁLIDO")
-            }
         case 1:
             getLocation(postalCode: textField.text ?? "")
         default: break
@@ -185,5 +275,79 @@ extension AddressViewController: UITextFieldDelegate {
             textField.updateText(string: textField.text ?? "")
         }
         return true
+    }
+}
+
+extension AddressViewController: AddressViewModelDelegate {
+    func validateSuccess() {
+        let viewController = CreditCardViewController()
+        show(viewController, sender: self)
+    }
+    
+    func validateFailedInTextField(tags: [Int]) {
+        tags.forEach { tag in
+            switch tag {
+            case 0:
+                alertErrorTextField(documentTextField)
+            case 1:
+                alertErrorTextField(postalCodeTextField)
+            case 2:
+                alertErrorTextField(addressTextField)
+            case 3:
+                alertErrorTextField(addressNumberTextField)
+            case 4:
+                alertErrorTextField(neighborhoodTextField)
+            case 6:
+                alertErrorTextField(stateTextField)
+            case 7:
+                alertErrorTextField(cityTextField)
+            default: break
+            }
+        }
+    }
+}
+
+// MARK: TRAVA
+protocol AddressViewModelDelegate: AnyObject {
+    func validateFailedInTextField(tags: [Int])
+    func validateSuccess()
+}
+
+class AddressViewModel {
+    
+    weak var delegate: AddressViewModelDelegate?
+    
+    func validateFields(array: [Int: String?]) {
+        var validatesSuccess: Bool = true
+        var tags: [Int] = []
+        
+        func validate(text: String?, tag: Int) {
+            if let string = text, string != "" {
+                return
+            }
+            validatesSuccess = false
+            tags.append(tag)
+        }
+
+        array.forEach { tag, text in
+            switch tag {
+            case 0: // MARK: CPF
+                if let string = text, string.isCPF {
+                    return
+                }
+                tags.append(tag)
+                validatesSuccess = false
+                return
+            case 1, 2, 3, 4, 6, 7: // MARK: CEP, ENDEREÇO, NÚMERO, BAIRRO, CIDADE E ESTADO
+                validate(text: text, tag: tag)
+            default: break
+            }
+        }
+        
+        if validatesSuccess {
+            delegate?.validateSuccess()
+        } else {
+            delegate?.validateFailedInTextField(tags: tags)
+        }
     }
 }
