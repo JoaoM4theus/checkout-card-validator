@@ -39,3 +39,18 @@ struct DocumentMask: Mask {
     public var maskFormat: String = "###.###.###-##"
     public init() { }
 }
+
+struct CreditCardNumberMask: Mask {
+    public var maskFormat: String = "#### #### #### ####"
+    public init() { }
+}
+
+struct CreditCardCVVMask: Mask {
+    public var maskFormat: String = "###"
+    public init() { }
+}
+
+struct CreditCardDueDateMask: Mask {
+    public var maskFormat: String = "##/##"
+    public init() { }
+}

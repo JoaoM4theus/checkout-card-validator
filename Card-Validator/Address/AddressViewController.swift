@@ -247,12 +247,12 @@ class AddressViewController: UIViewController {
         viewModel.validateFields(array: arrayTextFields)
     }
 
-    private func alertErrorTextField(_ textField: UITextField) {
+    private func alertErrorTextField(_ textField: UITextField, message: String = "Preencha os campos obrigatórios, por favor!") {
+        textError.text = message
         UIView.animate(withDuration: 1.5) {
             textField.layer.borderWidth = 2
             self.errorView.alpha = 1
         }
-        
         UIView.animate(withDuration: 1.5) {
             textField.layer.borderWidth = 0
             self.errorView.alpha = 0
@@ -281,14 +281,18 @@ extension AddressViewController: UITextFieldDelegate {
 extension AddressViewController: AddressViewModelDelegate {
     func validateSuccess() {
         let viewController = CreditCardViewController()
-        show(viewController, sender: self)
+        viewController.modalPresentationStyle = .pageSheet
+        if let sheet = viewController.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        present(viewController, animated: true)
     }
     
     func validateFailedInTextField(tags: [Int]) {
         tags.forEach { tag in
             switch tag {
             case 0:
-                alertErrorTextField(documentTextField)
+                alertErrorTextField(documentTextField, message: "Digite um CPF válido!")
             case 1:
                 alertErrorTextField(postalCodeTextField)
             case 2:
@@ -344,10 +348,10 @@ class AddressViewModel {
             }
         }
         
-        if validatesSuccess {
+//        if validatesSuccess {
             delegate?.validateSuccess()
-        } else {
-            delegate?.validateFailedInTextField(tags: tags)
-        }
+//        } else {
+//            delegate?.validateFailedInTextField(tags: tags)
+//        }
     }
 }
