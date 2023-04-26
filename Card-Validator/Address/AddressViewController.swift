@@ -280,7 +280,7 @@ extension AddressViewController: UITextFieldDelegate {
 
 extension AddressViewController: ValidatesFields {
     func validateSuccess() {
-        let viewController = CreditCardViewController()
+        let viewController = RegisterCardViewController()
         viewController.modalPresentationStyle = .pageSheet
         if let sheet = viewController.sheetPresentationController {
             sheet.detents = [.medium()]

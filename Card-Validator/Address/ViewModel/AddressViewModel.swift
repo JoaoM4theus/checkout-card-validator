@@ -43,10 +43,10 @@ class AddressViewModel {
             }
         }
         
-//        if validatesSuccess {
+        if validatesSuccess {
             delegate?.validateSuccess()
-//        } else {
-//            delegate?.validateFailedInTextField(tags: tags)
-//        }
+        } else {
+            delegate?.validateFailedInTextField(tags: tags)
+        }
     }
 }

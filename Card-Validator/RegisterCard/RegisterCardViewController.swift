@@ -1,5 +1,5 @@
 //
-//  CreditCardViewController.swift
+//  RegisterCardViewController.swift
 //  Card-Validator
 //
 //  Created by Joao Matheus on 13/04/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreditCardViewController: UIViewController {
+class RegisterCardViewController: UIViewController {
 
     private lazy var cardNumberTextField: CustomTextField = {
         let element = CustomTextField()
@@ -69,7 +69,7 @@ class CreditCardViewController: UIViewController {
         element.tag = 4
         element.layer.borderColor = UIColor.red.cgColor
         element.layer.cornerRadius = 9
-        element.placeholder = "Apelido"
+        element.placeholder = "Apelido *"
         element.borderStyle = .roundedRect
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -121,7 +121,7 @@ class CreditCardViewController: UIViewController {
     }()
 
     private var arrayTextFields: [Int: String?] = [:]
-    private let viewModel = CreditCardViewModel()
+    private let viewModel = RegisterCardViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +136,7 @@ class CreditCardViewController: UIViewController {
             cvvNumberTextField.tag: cvvNumberTextField.text,
             dueDateTextField.tag: dueDateTextField.text,
             nameCardTextField.tag: nameCardTextField.text,
+            surnameTextField.tag: surnameTextField.text
         ]
         viewModel.validateFields(array: arrayTextFields)
     }
@@ -192,16 +193,17 @@ class CreditCardViewController: UIViewController {
     }
 }
 
-extension CreditCardViewController: ValidatesFields {
+extension RegisterCardViewController: ValidatesFields {
     
     func validateSuccess() {
-//        let viewController = CreditCardViewController()
-//        viewController.modalPresentationStyle = .pageSheet
-//        if let sheet = viewController.sheetPresentationController {
-//            sheet.detents = [.medium()]
-//        }
-//        present(viewController, animated: true)
-        print("SUCESSO!")
+        guard let surname = surnameTextField.text,
+              let number = cardNumberTextField.text,
+              let validate = dueDateTextField.text else { return }
+        let creditCard = CreditCard(surname: surname,
+                                    number: number,
+                                    validate: validate)
+        let viewController = CrediCardViewController(creditCard: creditCard)
+        present(viewController, animated: true)
     }
     
     func validateFailedInTextField(tags: [Int]) {
@@ -216,13 +218,15 @@ extension CreditCardViewController: ValidatesFields {
                 alertErrorTextField(dueDateTextField, message: "O vencimento informado é indevido ou cartão já passou da validade. Por favor, digite os dados corretamente.")
             case 3:
                 alertErrorTextField(nameCardTextField, message: "O nome impresso do cartão está incorreto. Por favor, digite os dados corretamente.")
+            case 4:
+                alertErrorTextField(surnameTextField, message: "O apelido não foi preenchido. Por favor, digite os dados corretamente.")
             default: break
             }
         }
     }
 }
 
-class CreditCardViewModel {
+class RegisterCardViewModel {
     
     weak var delegate: ValidatesFields?
     
@@ -275,6 +279,13 @@ class CreditCardViewModel {
                     if string.components(separatedBy: " ").filter({ !$0.isEmpty}).count >= 2 {
                         return
                     }
+                }
+                tags.append(tag)
+                validatesSuccess = false
+                return
+            case 4:
+                if let string = text, string != "" {
+                    return
                 }
                 tags.append(tag)
                 validatesSuccess = false

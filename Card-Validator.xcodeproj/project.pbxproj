@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		DC04320B29E8BB9D00EE8E9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04320A29E8BB9D00EE8E9F /* AppDelegate.swift */; };
 		DC04320D29E8BB9D00EE8E9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04320C29E8BB9D00EE8E9F /* SceneDelegate.swift */; };
-		DC04320F29E8BB9D00EE8E9F /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04320E29E8BB9D00EE8E9F /* SegmentedViewController.swift */; };
 		DC04321429E8BB9E00EE8E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC04321329E8BB9E00EE8E9F /* Assets.xcassets */; };
 		DC04321729E8BB9E00EE8E9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC04321529E8BB9E00EE8E9F /* LaunchScreen.storyboard */; };
 		DC04322029E8BF5C00EE8E9F /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04321F29E8BF5C00EE8E9F /* AddressViewController.swift */; };
-		DC04322329E8BFBC00EE8E9F /* CreditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04322229E8BFBC00EE8E9F /* CreditCardViewController.swift */; };
+		DC04322329E8BFBC00EE8E9F /* RegisterCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC04322229E8BFBC00EE8E9F /* RegisterCardViewController.swift */; };
 		DCB5B76729F73A040021F0FD /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5B76629F73A040021F0FD /* AddressViewModel.swift */; };
 		DCBB3CCC29EAFAA800123724 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */; };
 		DCBB3CCE29EB063100123724 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB3CCD29EB063100123724 /* Mask.swift */; };
+		DCD02A1629F88A2300ACE0B6 /* CardType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD02A1529F88A2300ACE0B6 /* CardType.swift */; };
+		DCD02A1929F88B9400ACE0B6 /* CrediCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD02A1829F88B9400ACE0B6 /* CrediCardViewController.swift */; };
 		DCDC18F829EE0A42001FC5B4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,15 +25,16 @@
 		DC04320729E8BB9D00EE8E9F /* Card-Validator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Card-Validator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC04320A29E8BB9D00EE8E9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC04320C29E8BB9D00EE8E9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DC04320E29E8BB9D00EE8E9F /* SegmentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		DC04321329E8BB9E00EE8E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC04321629E8BB9E00EE8E9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC04321829E8BB9E00EE8E9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC04321F29E8BF5C00EE8E9F /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
-		DC04322229E8BFBC00EE8E9F /* CreditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardViewController.swift; sourceTree = "<group>"; };
+		DC04322229E8BFBC00EE8E9F /* RegisterCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCardViewController.swift; sourceTree = "<group>"; };
 		DCB5B76629F73A040021F0FD /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DCBB3CCD29EB063100123724 /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		DCD02A1529F88A2300ACE0B6 /* CardType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardType.swift; sourceTree = "<group>"; };
+		DCD02A1829F88B9400ACE0B6 /* CrediCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrediCardViewController.swift; sourceTree = "<group>"; };
 		DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,12 +68,12 @@
 		DC04320929E8BB9D00EE8E9F /* Card-Validator */ = {
 			isa = PBXGroup;
 			children = (
+				DCD02A1729F88AF800ACE0B6 /* CreditCard */,
 				DCBB3CCA29EAFA9800123724 /* Kit */,
-				DC04322129E8BFAE00EE8E9F /* CreditCard */,
+				DC04322129E8BFAE00EE8E9F /* RegisterCard */,
 				DC04321E29E8BF4700EE8E9F /* Address */,
 				DC04320A29E8BB9D00EE8E9F /* AppDelegate.swift */,
 				DC04320C29E8BB9D00EE8E9F /* SceneDelegate.swift */,
-				DC04320E29E8BB9D00EE8E9F /* SegmentedViewController.swift */,
 				DC04321329E8BB9E00EE8E9F /* Assets.xcassets */,
 				DC04321529E8BB9E00EE8E9F /* LaunchScreen.storyboard */,
 				DC04321829E8BB9E00EE8E9F /* Info.plist */,
@@ -88,12 +90,12 @@
 			path = Address;
 			sourceTree = "<group>";
 		};
-		DC04322129E8BFAE00EE8E9F /* CreditCard */ = {
+		DC04322129E8BFAE00EE8E9F /* RegisterCard */ = {
 			isa = PBXGroup;
 			children = (
-				DC04322229E8BFBC00EE8E9F /* CreditCardViewController.swift */,
+				DC04322229E8BFBC00EE8E9F /* RegisterCardViewController.swift */,
 			);
-			path = CreditCard;
+			path = RegisterCard;
 			sourceTree = "<group>";
 		};
 		DCB5B76529F739EE0021F0FD /* ViewModel */ = {
@@ -110,8 +112,17 @@
 				DCBB3CCB29EAFAA800123724 /* CustomTextField.swift */,
 				DCBB3CCD29EB063100123724 /* Mask.swift */,
 				DCDC18F729EE0A42001FC5B4 /* StringExtensions.swift */,
+				DCD02A1529F88A2300ACE0B6 /* CardType.swift */,
 			);
 			path = Kit;
+			sourceTree = "<group>";
+		};
+		DCD02A1729F88AF800ACE0B6 /* CreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				DCD02A1829F88B9400ACE0B6 /* CrediCardViewController.swift */,
+			);
+			path = CreditCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,14 +196,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCDC18F829EE0A42001FC5B4 /* StringExtensions.swift in Sources */,
-				DC04320F29E8BB9D00EE8E9F /* SegmentedViewController.swift in Sources */,
 				DCB5B76729F73A040021F0FD /* AddressViewModel.swift in Sources */,
+				DCD02A1629F88A2300ACE0B6 /* CardType.swift in Sources */,
 				DC04320B29E8BB9D00EE8E9F /* AppDelegate.swift in Sources */,
 				DCBB3CCE29EB063100123724 /* Mask.swift in Sources */,
 				DCBB3CCC29EAFAA800123724 /* CustomTextField.swift in Sources */,
 				DC04320D29E8BB9D00EE8E9F /* SceneDelegate.swift in Sources */,
 				DC04322029E8BF5C00EE8E9F /* AddressViewController.swift in Sources */,
-				DC04322329E8BFBC00EE8E9F /* CreditCardViewController.swift in Sources */,
+				DCD02A1929F88B9400ACE0B6 /* CrediCardViewController.swift in Sources */,
+				DC04322329E8BFBC00EE8E9F /* RegisterCardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
