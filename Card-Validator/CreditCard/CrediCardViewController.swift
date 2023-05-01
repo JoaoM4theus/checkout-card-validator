@@ -17,7 +17,7 @@ class CrediCardViewController: UIViewController {
         element.textAlignment = .center
         return element
     }()
-    
+
     private lazy var surnameLabel: UILabel = {
         let element = UILabel()
         element.translatesAutoresizingMaskIntoConstraints = false
